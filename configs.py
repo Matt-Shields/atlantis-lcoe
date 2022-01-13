@@ -13,51 +13,61 @@ from common import base
 # Shared config information
 US_east_coast = {
     # All placeholder values for now
-    # "site": {
-    #     "depth": 150,
-    #     "distance": 100,
-    #     "distance_to_landfall": 100
-    # },
+    "site": {
+        "depth": 150,
+        "distance": 100,
+        "distance_to_landfall": 100
+    },
     "port": {
         "monthly_rate": 1e6,
     },
-    'semisubmersible_design': {
-        'stiffened_column_CR': 6000,
-        'truss_CR': 5000,
-        'heave_plate_CR': 6000,
-        'secondary_steel_CR': 10000,
+    "semisubmersible_design": {
+        "column_diameter": 12.5,
+        "wall_thickness":  0.065,
+        "column_height": 35,
+        "pontoon_length": 51.75,
+        "pontoon_width": 12.5,
+        "pontoon_height": 7,
+        "strut_diameter": 0.9,
+        # "steel_density": "kg/m^3 (optional, default: 8050)",
+        # "ballast_mass": "tonnes (optional, default 2540)",
+        # "steel_cost_rate": "$/tonne (optional, default: 3120)",
+        # "ballast_cost_rate": "$/tonne (optional, default: 150)"
     },
     "project_parameters": {
         "turbine_capex": 1500
     },
+    "turbine": "15MW",
     "weather": "US_east_coast"
 }
 
 # Define specific scenario inputs
-us_10MW_shallow = {
+us_steel_semisub = {
     **base,
     **US_east_coast,
-    "turbine": "10MW",
-    "site": {
-        "depth": 150,
-        "distance": 50,
-        "distance_to_landfall": 50
-    }
 }
 
-us_15MW_deep = {
+us_concrete_semisub = {
     **base,
     **US_east_coast,
     "turbine": "15MW",
-    "site": {
-        "depth": 400,
-        "distance": 200,
-        "distance_to_landfall": 200
-    }
+    "semisubmersible_design": {
+        "column_diameter": 12.5,
+        "wall_thickness": 0.065,
+        "column_height": 35,
+        "pontoon_length": 51.75,
+        "pontoon_width": 12.5,
+        "pontoon_height": 7,
+        "strut_diameter": 0.9,
+        # "steel_density": "kg/m^3 (optional, default: 8050)",
+        # "ballast_mass": "tonnes (optional, default 2540)",
+        "steel_cost_rate": 1000,
+        # "ballast_cost_rate": "$/tonne (optional, default: 150)"
+    },
 
 }
 
 configs = {
-    "US_10MW_shallow": us_10MW_shallow,
-    "US_15MW_deep": us_15MW_deep
+    "steel_semisub": us_steel_semisub,
+    "concrete_semisub": us_concrete_semisub
 }

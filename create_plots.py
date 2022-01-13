@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 
 
 SCENARIO_MAP = {
-    "US_10MW_shallow": "Shallow water, 10 MW turbine",
-    "US_15MW_deep": "Deep water, 15 MW turbine"
+    "steel_semisub": "Steel",
+    "concrete_semisub": "Concrete"
 }
 
 FIGDIR = os.path.join(os.getcwd(), "figures")
@@ -91,23 +91,23 @@ def capex_breakdown_plots(df):
     fig = plt.figure(figsize=(6, 4), dpi=200)
     ax = fig.add_subplot(111)
 
-    df.T.plot(kind='bar', stacked=True, ax=ax)
+    df.T.plot(kind='bar', stacked=True, ax=ax).legend(bbox_to_anchor=(1.05, 1))
 
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($)")
 
-    fig.savefig(os.path.join(FIGDIR, "capex_breakdown.png"))
+    fig.savefig(os.path.join(FIGDIR, "capex_breakdown.png"), bbox_inches='tight')
 
     # Raw CapEx
     fig = plt.figure(figsize=(6, 4), dpi=200)
     ax = fig.add_subplot(111)
 
-    df.divide(PROJECT_kW).T.plot(kind='bar', stacked=True, ax=ax)
+    df.divide(PROJECT_kW).T.plot(kind='bar', stacked=True, ax=ax).legend(bbox_to_anchor=(1.05, 1))
 
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($/kW)")
 
-    fig.savefig(os.path.join(FIGDIR, "breakdown_per_kW.png"))
+    fig.savefig(os.path.join(FIGDIR, "breakdown_per_kW.png"), bbox_inches='tight')
 
 
 def installation_time_plots(df):

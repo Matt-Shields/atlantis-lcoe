@@ -13,6 +13,7 @@ from copy import deepcopy
 from ORBIT import ProjectManager
 from configs import configs
 from ORBIT.core.library import initialize_library
+from semisub_pontoon_design import CustomSemiSubmersibleDesign
 
 
 initialize_library("data")
@@ -35,6 +36,8 @@ def run():
     total_capex = {}
     breakdowns = {}
     installation_times = {}
+
+    ProjectManager._design_phases.append(CustomSemiSubmersibleDesign)
 
     for name, config in configs.items():
 
