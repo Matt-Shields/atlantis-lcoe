@@ -45,8 +45,6 @@ INSTALL = pd.read_csv("outputs/installation_times.csv").rename(columns={
 INSTALL = INSTALL.set_index("year")
 INSTALL.columns = INSTALL.columns.map(lambda x: SCENARIO_MAP[x])
 
-print(INSTALL)
-
 def total_capex_plots(df):
     """"""
 
@@ -72,10 +70,10 @@ def total_capex_plots(df):
 
     fig.savefig(os.path.join(FIGDIR, "total_per_kW.png"))
 
-    # LCOE
-    opex = 130
-    fcr = .058
-    ncf = 0.38
+    # LCOE - Match Aqua Ventus report (https://www.nrel.gov/docs/fy20osti/75618.pdf)
+    opex = 38
+    fcr = .0718
+    ncf = 0.5086
 
     fig = plt.figure(figsize=(6, 4), dpi=200)
     ax = fig.add_subplot(111)

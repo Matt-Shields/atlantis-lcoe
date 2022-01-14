@@ -35,7 +35,7 @@ US_east_coast = {
         # "ballast_cost_rate": "$/tonne (optional, default: 150)"
     },
     "project_parameters": {
-        "turbine_capex": 1500
+        "turbine_capex": 1020
     },
     "turbine": "15MW",
     "weather": "US_east_coast"
