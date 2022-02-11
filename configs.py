@@ -57,7 +57,33 @@ us_15MW_deep = {
 
 }
 
+us_15MW_shallow = {
+    **base,
+    **US_east_coast,
+    "turbine": "15MW",
+    "site": {
+        "depth": 150,
+        "distance": 50,
+        "distance_to_landfall": 50
+    }
+
+}
+
+us_10MW_deep = {
+    **base,
+    **US_east_coast,
+    "turbine": "10MW",
+    "site": {
+        "depth": 400,
+        "distance": 200,
+        "distance_to_landfall": 200
+    }
+
+}
+
 configs = {
     "US_10MW_shallow": us_10MW_shallow,
-    "US_15MW_deep": us_15MW_deep
+    "US_15MW_deep": us_15MW_deep,
+    "US_15MW_shallow": us_15MW_shallow,
+    "US_10MW_deep": us_10MW_deep,
 }

@@ -14,7 +14,9 @@ import matplotlib.pyplot as plt
 
 SCENARIO_MAP = {
     "US_10MW_shallow": "Shallow water, 10 MW turbine",
-    "US_15MW_deep": "Deep water, 15 MW turbine"
+    "US_15MW_deep": "Deep water, 15 MW turbine",
+    "US_15MW_shallow": "Shallow water, 15 MW turbine",
+    "US_10MW_deep": "Deep water, 10 MW turbine",
 }
 
 FIGDIR = os.path.join(os.getcwd(), "figures")
@@ -52,7 +54,7 @@ def total_capex_plots(df):
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($)")
 
-    fig.savefig(os.path.join(FIGDIR, "total_capex.png"))
+    fig.savefig(os.path.join(FIGDIR, "total_capex.png"), bbox_inches='tight')
 
     # CapEx per kW
     fig = plt.figure(figsize=(6, 4), dpi=200)
@@ -63,7 +65,7 @@ def total_capex_plots(df):
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($/kW)")
 
-    fig.savefig(os.path.join(FIGDIR, "total_per_kW.png"))
+    fig.savefig(os.path.join(FIGDIR, "total_per_kW.png"), bbox_inches='tight')
 
     # LCOE
     opex = 130
@@ -78,11 +80,10 @@ def total_capex_plots(df):
     df_lcoe.plot(kind='bar', ax=ax, rot=45)
     ax.set_xlabel("")
     ax.set_ylabel("LCOE ($/MWh)")
-    plt.tight_layout()
 
 
 
-    fig.savefig(os.path.join(FIGDIR, "LCOE.png"))
+    fig.savefig(os.path.join(FIGDIR, "LCOE.png"), bbox_inches='tight')
 
 def capex_breakdown_plots(df):
     """"""
@@ -96,7 +97,7 @@ def capex_breakdown_plots(df):
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($)")
 
-    fig.savefig(os.path.join(FIGDIR, "capex_breakdown.png"))
+    fig.savefig(os.path.join(FIGDIR, "capex_breakdown.png"), bbox_inches='tight')
 
     # Raw CapEx
     fig = plt.figure(figsize=(6, 4), dpi=200)
@@ -107,7 +108,7 @@ def capex_breakdown_plots(df):
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($/kW)")
 
-    fig.savefig(os.path.join(FIGDIR, "breakdown_per_kW.png"))
+    fig.savefig(os.path.join(FIGDIR, "breakdown_per_kW.png"), bbox_inches='tight')
 
 
 def installation_time_plots(df):

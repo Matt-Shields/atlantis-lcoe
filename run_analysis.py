@@ -21,7 +21,8 @@ initialize_library("data")
 TRANSPORT_COSTS = 1e6 / 5000  # $/t
 PROJECT_kW = 300 * 1000
 WEATHER_FILES = {
-    "US_east_coast": "data/weather/vineyard_wind_weather_1983_2017_orbit.csv",
+    "US_east_coast": "data/weather/vineyard_2014_onward.csv",
+    # "US_east_coast": "data/weather/vineyard_wind_weather_1983_2017_orbit.csv",
     # Additional site weather profiles go here
 }
 WEATHER = {k: pd.read_csv(v, parse_dates=["datetime"]).set_index("datetime")
