@@ -134,7 +134,7 @@ base = {
         'ExportSystemDesign',
         "MooringSystemDesign",
         'OffshoreSubstationDesign',
-        "SemiSubmersibleDesign",
+        "CustomSemiSubmersibleDesign",
     ],
     "install_phases": {
         'ArrayCableInstallation': 0,

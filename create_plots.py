@@ -40,7 +40,12 @@ BREAKDOWNS = pd.read_csv("outputs/breakdown.csv").rename(columns={
 BREAKDOWNS = BREAKDOWNS.set_index("Category")
 BREAKDOWNS.columns = BREAKDOWNS.columns.map(lambda x: SCENARIO_MAP[x])
 
-
+# Installation times
+INSTALL = pd.read_csv("outputs/installation_times.csv").rename(columns={
+    "Unnamed: 0": "year",
+})
+INSTALL = INSTALL.set_index("year")
+INSTALL.columns = INSTALL.columns.map(lambda x: SCENARIO_MAP[x])
 
 def total_capex_plots(df):
     """"""
@@ -67,10 +72,10 @@ def total_capex_plots(df):
 
     fig.savefig(os.path.join(FIGDIR, "total_per_kW.png"), bbox_inches='tight')
 
-    # LCOE
-    opex = 130
-    fcr = .058
-    ncf = 0.38
+    # LCOE - Match Aqua Ventus report (https://www.nrel.gov/docs/fy20osti/75618.pdf)
+    opex = 38
+    fcr = .0718
+    ncf = 0.5086
 
     fig = plt.figure(figsize=(6, 4), dpi=200)
     ax = fig.add_subplot(111)
@@ -92,7 +97,7 @@ def capex_breakdown_plots(df):
     fig = plt.figure(figsize=(6, 4), dpi=200)
     ax = fig.add_subplot(111)
 
-    df.T.plot(kind='bar', stacked=True, ax=ax)
+    df.T.plot(kind='bar', stacked=True, ax=ax).legend(bbox_to_anchor=(1.05, 1))
 
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($)")
@@ -103,7 +108,7 @@ def capex_breakdown_plots(df):
     fig = plt.figure(figsize=(6, 4), dpi=200)
     ax = fig.add_subplot(111)
 
-    df.divide(PROJECT_kW).T.plot(kind='bar', stacked=True, ax=ax)
+    df.divide(PROJECT_kW).T.plot(kind='bar', stacked=True, ax=ax).legend(bbox_to_anchor=(1.05, 1))
 
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($/kW)")
@@ -113,11 +118,18 @@ def capex_breakdown_plots(df):
 
 def installation_time_plots(df):
     """"""
+    fig = plt.figure(figsize=(6, 4), dpi=200)
+    ax = fig.add_subplot(111)
 
-    pass
+    df.divide(24*30).boxplot()
 
+    ax.set_xlabel("")
+    ax.set_ylabel("Installation time, months")
+
+    fig.savefig(os.path.join(FIGDIR, "installation_times.png"), bbox_inches='tight')
 
 if __name__ == "__main__":
 
     total_capex_plots(TOTALS)
     capex_breakdown_plots(BREAKDOWNS)
+    installation_time_plots(INSTALL)
