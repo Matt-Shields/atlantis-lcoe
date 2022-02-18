@@ -92,13 +92,8 @@ us_10MW_deep = {
 }
 
 configs = {
-<<<<<<< HEAD
     "US_10MW_shallow": us_10MW_shallow,
     "US_15MW_deep": us_15MW_deep,
     "US_15MW_shallow": us_15MW_shallow,
     "US_10MW_deep": us_10MW_deep,
-=======
-    "steel_semisub": us_steel_semisub,
-    "concrete_semisub": us_concrete_semisub
->>>>>>> 6b128356af2e834b4387f6c81818c1a820ee9b4d
 }
