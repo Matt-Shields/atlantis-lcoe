@@ -13,8 +13,10 @@ import matplotlib.pyplot as plt
 
 
 SCENARIO_MAP = {
-    "steel_semisub": "Steel",
-    "concrete_semisub": "Concrete"
+    "US_10MW_shallow": "Shallow water, 10 MW turbine",
+    "US_15MW_deep": "Deep water, 15 MW turbine",
+    "US_15MW_shallow": "Shallow water, 15 MW turbine",
+    "US_10MW_deep": "Deep water, 10 MW turbine",
 }
 
 FIGDIR = os.path.join(os.getcwd(), "figures")
@@ -57,7 +59,7 @@ def total_capex_plots(df):
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($)")
 
-    fig.savefig(os.path.join(FIGDIR, "total_capex.png"))
+    fig.savefig(os.path.join(FIGDIR, "total_capex.png"), bbox_inches='tight')
 
     # CapEx per kW
     fig = plt.figure(figsize=(6, 4), dpi=200)
@@ -68,7 +70,7 @@ def total_capex_plots(df):
     ax.set_xlabel("")
     ax.set_ylabel("CapEx ($/kW)")
 
-    fig.savefig(os.path.join(FIGDIR, "total_per_kW.png"))
+    fig.savefig(os.path.join(FIGDIR, "total_per_kW.png"), bbox_inches='tight')
 
     # LCOE - Match Aqua Ventus report (https://www.nrel.gov/docs/fy20osti/75618.pdf)
     opex = 38
@@ -83,11 +85,10 @@ def total_capex_plots(df):
     df_lcoe.plot(kind='bar', ax=ax, rot=45)
     ax.set_xlabel("")
     ax.set_ylabel("LCOE ($/MWh)")
-    plt.tight_layout()
 
 
 
-    fig.savefig(os.path.join(FIGDIR, "LCOE.png"))
+    fig.savefig(os.path.join(FIGDIR, "LCOE.png"), bbox_inches='tight')
 
 def capex_breakdown_plots(df):
     """"""
