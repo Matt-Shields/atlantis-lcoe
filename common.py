@@ -129,13 +129,6 @@ base = {
     # },
 
     # ORBIT Configuration
-    "design_phases": [
-        'ArraySystemDesign',
-        'ExportSystemDesign',
-        "MooringSystemDesign",
-        'OffshoreSubstationDesign',
-        "CustomSemiSubmersibleDesign",
-    ],
     "install_phases": {
         'ArrayCableInstallation': 0,
         'ExportCableInstallation': 0,

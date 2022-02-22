@@ -13,10 +13,9 @@ import matplotlib.pyplot as plt
 
 
 SCENARIO_MAP = {
-    "US_10MW_shallow": "Shallow water, 10 MW turbine",
-    "US_15MW_deep": "Deep water, 15 MW turbine",
-    "US_15MW_shallow": "Shallow water, 15 MW turbine",
-    "US_10MW_deep": "Deep water, 10 MW turbine",
+    'Aqua Ventus': 'Aqua Ventus (2019 report)',
+    'IEA15MW (Steel)': 'IEA 15 MW reference (steel)',
+    'IEA15MW (Concrete)': 'IEA 15 MW reference (concrete)'
 }
 
 FIGDIR = os.path.join(os.getcwd(), "figures")

@@ -21,9 +21,41 @@ US_east_coast = {
     "port": {
         "monthly_rate": 1e6,
     },
+    "project_parameters": {
+        "turbine_capex": 1020
+    },
+    "turbine": "15MW",
+    "weather": "US_east_coast"
+}
+
+# Define specific scenario inputs
+AquaVentus_comp = {
+    **base,
+    **US_east_coast,
+    # "turbine": "6MW",
+    "design_phases": [
+        'ArraySystemDesign',
+        'ExportSystemDesign',
+        "MooringSystemDesign",
+        'OffshoreSubstationDesign',
+        "SemiSubmersibleDesign",
+    ],
+
+}
+
+IEA15MW_steel = {
+    **base,
+    **US_east_coast,
+    "design_phases": [
+        'ArraySystemDesign',
+        'ExportSystemDesign',
+        "MooringSystemDesign",
+        'OffshoreSubstationDesign',
+        "CustomSemiSubmersibleDesign",
+    ],
     "semisubmersible_design": {
         "column_diameter": 12.5,
-        "wall_thickness":  0.065,
+        "wall_thickness": 0.065,
         "column_height": 35,
         "pontoon_length": 51.75,
         "pontoon_width": 12.5,
@@ -34,23 +66,18 @@ US_east_coast = {
         # "steel_cost_rate": "$/tonne (optional, default: 3120)",
         # "ballast_cost_rate": "$/tonne (optional, default: 150)"
     },
-    "project_parameters": {
-        "turbine_capex": 1020
-    },
-    "turbine": "15MW",
-    "weather": "US_east_coast"
 }
 
-# Define specific scenario inputs
-us_steel_semisub = {
+IEA15MW_concrete = {
     **base,
     **US_east_coast,
-}
-
-us_concrete_semisub = {
-    **base,
-    **US_east_coast,
-    "turbine": "15MW",
+    "design_phases": [
+        'ArraySystemDesign',
+        'ExportSystemDesign',
+        "MooringSystemDesign",
+        'OffshoreSubstationDesign',
+        "CustomSemiSubmersibleDesign",
+    ],
     "semisubmersible_design": {
         "column_diameter": 12.5,
         "wall_thickness": 0.065,
@@ -67,33 +94,13 @@ us_concrete_semisub = {
 
 }
 
-us_15MW_shallow = {
-    **base,
-    **US_east_coast,
-    "turbine": "15MW",
-    "site": {
-        "depth": 150,
-        "distance": 50,
-        "distance_to_landfall": 50
-    }
-
-}
-
-us_10MW_deep = {
-    **base,
-    **US_east_coast,
-    "turbine": "10MW",
-    "site": {
-        "depth": 400,
-        "distance": 200,
-        "distance_to_landfall": 200
-    }
-
-}
 
 configs = {
-    "US_10MW_shallow": us_10MW_shallow,
-    "US_15MW_deep": us_15MW_deep,
-    "US_15MW_shallow": us_15MW_shallow,
-    "US_10MW_deep": us_10MW_deep,
+    "Aqua Ventus": AquaVentus_comp,
+    "IEA15MW (Steel)": IEA15MW_steel,
+    "IEA15MW (Concrete)": IEA15MW_concrete
+    # "US_10MW_shallow": us_15MW_shallow,
+    # "US_15MW_deep": us_10MW_deep,
+    # "US_15MW_shallow": us_15MW_shallow,
+    # "US_10MW_deep": us_10MW_deep,
 }

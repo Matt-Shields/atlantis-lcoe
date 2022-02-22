@@ -20,7 +20,7 @@ initialize_library("data")
 
 
 TRANSPORT_COSTS = 1e6 / 5000  # $/t
-PROJECT_kW = 300 * 1000
+PROJECT_kW = 600 * 1000
 WEATHER_FILES = {
     "US_east_coast": "data/weather/vineyard_2014_onward.csv",
     # "US_east_coast": "data/weather/vineyard_wind_weather_1983_2017_orbit.csv",
@@ -43,6 +43,7 @@ def run():
     for name, config in configs.items():
 
         print(f"Running config '{name}'")
+
         _times = {}
         weather = config.pop("weather", None)
         if weather:
@@ -61,7 +62,7 @@ def run():
 
             except:
                 continue
-                
+
             _times[yr] = project.project_time
             test_capex_breakdown(name, project)
             total, bos, breakdown = append_transport_capex(name, project)
