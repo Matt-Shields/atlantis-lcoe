@@ -115,17 +115,21 @@ base = {
 
     # Project Finance
     # 'project_parameters': {
-    #     'turbine_capex': 1100,
-    #     'ncf': 0.5,
-    #     'offtake_price': 80,
-    #     'project_lifetime': 25,
-    #     'discount_rate': 0.025,
-    #     'opex_rate': 150,
-    #     'construction_insurance': 44,
-    #     'construction_financing': 183,
-    #     'contingency': 316,
-    #     'commissioning': 44,
-    #     'decommissioning': 58
+    #     # 'turbine_capex': 1100,
+    #     # 'ncf': 0.5,
+    #     # 'offtake_price': 80,
+    #     # 'project_lifetime': 25,
+    #     # 'discount_rate': 0.025,
+    #     # 'opex_rate': 150,
+    #     'construction_insurance': 30,
+    #     'construction_financing': 124,
+    #     'contingency': 196,
+    #     'commissioning': 30,
+    #     'decommissioning': 28,
+    #     'site_auction_price': 52925529,
+    #     'site_assessment_cost': 50486746,
+    #     'construction_plan_cost': 28604389,
+    #     'installation_plan_cost': 0
     # },
 
     # ORBIT Configuration
