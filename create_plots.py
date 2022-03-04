@@ -13,7 +13,8 @@ import matplotlib.pyplot as plt
 
 
 SCENARIO_MAP = {
-    'Aqua Ventus': 'Aqua Ventus (2019 report)',
+    '2019 Aqua Ventus': 'Aqua Ventus (2019 report)',
+    'ORBIT Aqua Ventus': 'Aqua Ventus (ORBIT settings)',
     'IEA15MW (Steel)': 'IEA 15 MW reference (steel)',
     'IEA15MW (Concrete)': 'IEA 15 MW reference (concrete)'
 }

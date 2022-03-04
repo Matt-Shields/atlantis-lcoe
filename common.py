@@ -133,11 +133,5 @@ base = {
     # },
 
     # ORBIT Configuration
-    "install_phases": {
-        'ArrayCableInstallation': 0,
-        'ExportCableInstallation': 0,
-        "MooredSubInstallation": ("MooringSystemInstallation", 0.5),
-        "MooringSystemInstallation": 0,
-        'FloatingSubstationInstallation': 0,
-    },
+
 }

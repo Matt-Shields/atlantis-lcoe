@@ -18,9 +18,12 @@ from semisub_pontoon_design import CustomSemiSubmersibleDesign
 
 initialize_library("data")
 
-
-TRANSPORT_COSTS = 1e6 / 5000  # $/t
 PROJECT_kW = 600 * 1000
+AQUA_VENTUS_SUB_COSTS = 690 * PROJECT_kW # $
+AQUA_VENTUS_MOOR_COSTS = 0
+AQUA_VENTUS_ELEC_COSTS = 466 * PROJECT_kW # $
+TRANSPORT_COSTS = 1e6 / 5000  # $/t
+
 WEATHER_FILES = {
     "US_east_coast": "data/weather/vineyard_2014_onward.csv",
     # "US_east_coast": "data/weather/vineyard_wind_weather_1983_2017_orbit.csv",
@@ -65,7 +68,7 @@ def run():
 
             _times[yr] = project.project_time
             test_capex_breakdown(name, project)
-            total, bos, breakdown = append_transport_capex(name, project)
+            total, bos, breakdown = append_capex(name, project)
 
         print(f"\tRan {yrs} simulations")
 
@@ -95,9 +98,9 @@ def run():
     times.to_csv("outputs/installation_times.csv")
 
 
-def append_transport_capex(name, project):
+def append_capex(name, project):
     """
-    Ability to add transportation Capex for importing international components
+    Ability to add Capex components (ie for importing international components or for user-defined costs)
     :param name:
     :param project:
     :return:
@@ -110,11 +113,31 @@ def append_transport_capex(name, project):
         breakdown["Substructure Transportation"] = cost
         total = project.total_capex + cost
         bos = project.bos_capex + cost
+    elif "2019 Aqua Ventus" in name:
+        breakdown = deepcopy(project.capex_breakdown)
 
+        bos = project.bos_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS + AQUA_VENTUS_ELEC_COSTS
+        
+        total = project.total_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS + AQUA_VENTUS_ELEC_COSTS
+
+        breakdown["Substructure"] = AQUA_VENTUS_SUB_COSTS
+        breakdown["Mooring System"] = AQUA_VENTUS_MOOR_COSTS
+        breakdown["Electrical System"] = AQUA_VENTUS_ELEC_COSTS
+
+    elif "ORBIT Aqua Ventus" in name:
+        breakdown = deepcopy(project.capex_breakdown)
+
+        bos = project.bos_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS 
+        
+        total = project.total_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS
+
+        breakdown["Substructure"] = AQUA_VENTUS_SUB_COSTS
+        breakdown["Mooring System"] = AQUA_VENTUS_MOOR_COSTS
+        
     else:
         breakdown = deepcopy(project.capex_breakdown)
-        total = project.total_capex
-        bos = project.bos_capex
+        total = project.total_capex 
+        bos = project.bos_capex 
 
     return total, bos, breakdown
 

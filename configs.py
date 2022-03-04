@@ -14,9 +14,9 @@ from common import base
 US_east_coast = {
     # All placeholder values for now
     "site": {
-        "depth": 150,
-        "distance": 100,
-        "distance_to_landfall": 100
+        "depth": 100,
+        "distance": 52,
+        "distance_to_landfall": 52
     },
     "port": {
         "monthly_rate": 1e6,
@@ -43,7 +43,21 @@ US_east_coast = {
 }
 
 # Define specific scenario inputs
-AquaVentus_comp = {
+AquaVentus_match = {
+    **base,
+    **US_east_coast,
+    # "turbine": "6MW",
+    "design_phases": [
+        "MooringSystemDesign",
+        "SemiSubmersibleDesign",
+    ],
+    "install_phases": {
+        "MooredSubInstallation": ("MooringSystemInstallation", 0.5),
+        "MooringSystemInstallation": 0,
+    },
+}
+
+AquaVentus_orbit = {
     **base,
     **US_east_coast,
     # "turbine": "6MW",
@@ -51,10 +65,16 @@ AquaVentus_comp = {
         'ArraySystemDesign',
         'ExportSystemDesign',
         "MooringSystemDesign",
-        'OffshoreSubstationDesign',
         "SemiSubmersibleDesign",
+        'OffshoreSubstationDesign'
     ],
-
+    "install_phases": {
+        "MooredSubInstallation": ("MooringSystemInstallation", 0.5),
+        "MooringSystemInstallation": 0,
+        "ArrayCableInstallation": 0,
+        "ExportCableInstallation": 0,
+        "FloatingSubstationInstallation": 0
+    },
 }
 
 IEA15MW_steel = {
@@ -67,6 +87,13 @@ IEA15MW_steel = {
         'OffshoreSubstationDesign',
         "CustomSemiSubmersibleDesign",
     ],
+    "install_phases": {
+        "MooredSubInstallation": ("MooringSystemInstallation", 0.5),
+        "MooringSystemInstallation": 0,
+        "ArrayCableInstallation": 0,
+        "ExportCableInstallation": 0,
+        "FloatingSubstationInstallation": 0
+    },
     "semisubmersible_design": {
         "column_diameter": 12.5,
         "wall_thickness": 0.065,
@@ -92,6 +119,13 @@ IEA15MW_concrete = {
         'OffshoreSubstationDesign',
         "CustomSemiSubmersibleDesign",
     ],
+    "install_phases": {
+        "MooredSubInstallation": ("MooringSystemInstallation", 0.5),
+        "MooringSystemInstallation": 0,
+        "ArrayCableInstallation": 0,
+        "ExportCableInstallation": 0,
+        "FloatingSubstationInstallation": 0
+    },
     "semisubmersible_design": {
         "column_diameter": 12.5,
         "wall_thickness": 0.065,
@@ -110,7 +144,8 @@ IEA15MW_concrete = {
 
 
 configs = {
-    "Aqua Ventus": AquaVentus_comp,
+    "2019 Aqua Ventus": AquaVentus_match,
+    "ORBIT Aqua Ventus": AquaVentus_orbit,
     "IEA15MW (Steel)": IEA15MW_steel,
     "IEA15MW (Concrete)": IEA15MW_concrete
     # "US_10MW_shallow": us_15MW_shallow,
