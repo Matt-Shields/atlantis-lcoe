@@ -13,10 +13,10 @@ import matplotlib.pyplot as plt
 
 
 SCENARIO_MAP = {
-    '2019 Aqua Ventus': 'Aqua Ventus (2019 report)',
-    'ORBIT Aqua Ventus': 'Aqua Ventus (ORBIT settings)',
-    'IEA15MW (Steel)': 'IEA 15 MW reference (steel)',
-    'IEA15MW (Concrete)': 'IEA 15 MW reference (concrete)'
+    # '2019 Aqua Ventus': 'Aqua Ventus (2019 report)',
+    'Aqua Ventus': 'Aqua Ventus (2019 report)',
+    'IEA 15MW': 'IEA 15 MW reference',
+    'NASA Floater': 'NASA Floater'
 }
 
 FIGDIR = os.path.join(os.getcwd(), "figures")

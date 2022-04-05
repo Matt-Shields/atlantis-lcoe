@@ -136,18 +136,18 @@ IEA15MW_concrete = {
         "strut_diameter": 0.9,
         # "steel_density": "kg/m^3 (optional, default: 8050)",
         # "ballast_mass": "tonnes (optional, default 2540)",
-        "steel_cost_rate": 1000,
-        # "ballast_cost_rate": "$/tonne (optional, default: 150)"
+        "steel_cost_rate": 0,
+        "ballast_cost_rate": 0,
     },
 
 }
 
 
 configs = {
-    "2019 Aqua Ventus": AquaVentus_match,
-    "ORBIT Aqua Ventus": AquaVentus_orbit,
-    "IEA15MW (Steel)": IEA15MW_steel,
-    "IEA15MW (Concrete)": IEA15MW_concrete
+    # "2019 Aqua Ventus": AquaVentus_match,
+    "Aqua Ventus": AquaVentus_orbit,
+    "IEA 15MW": IEA15MW_steel,
+    "NASA Floater": IEA15MW_concrete
     # "US_10MW_shallow": us_15MW_shallow,
     # "US_15MW_deep": us_10MW_deep,
     # "US_15MW_shallow": us_15MW_shallow,

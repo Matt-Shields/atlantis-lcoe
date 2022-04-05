@@ -23,6 +23,7 @@ AQUA_VENTUS_SUB_COSTS = 690 * PROJECT_kW # $
 AQUA_VENTUS_MOOR_COSTS = 0
 AQUA_VENTUS_ELEC_COSTS = 466 * PROJECT_kW # $
 TRANSPORT_COSTS = 1e6 / 5000  # $/t
+NASA_FLOATER_SUB_COSTS = 369.54 * PROJECT_kW
 
 WEATHER_FILES = {
     "US_east_coast": "data/weather/vineyard_2014_onward.csv",
@@ -57,7 +58,7 @@ def run():
         for yr in np.unique(weather.index.year):
             start = dt.date(yr, START_MONTH, 1)
             sub = weather.loc[start:]
-            
+
             try:
                 project = ProjectManager(config, weather=sub)
                 project.run()
@@ -117,27 +118,35 @@ def append_capex(name, project):
         breakdown = deepcopy(project.capex_breakdown)
 
         bos = project.bos_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS + AQUA_VENTUS_ELEC_COSTS
-        
+
         total = project.total_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS + AQUA_VENTUS_ELEC_COSTS
 
         breakdown["Substructure"] = AQUA_VENTUS_SUB_COSTS
         breakdown["Mooring System"] = AQUA_VENTUS_MOOR_COSTS
         breakdown["Electrical System"] = AQUA_VENTUS_ELEC_COSTS
 
-    elif "ORBIT Aqua Ventus" in name:
+    elif "Aqua Ventus" in name:
         breakdown = deepcopy(project.capex_breakdown)
 
-        bos = project.bos_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS 
-        
+        bos = project.bos_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS
+
         total = project.total_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS
 
         breakdown["Substructure"] = AQUA_VENTUS_SUB_COSTS
         breakdown["Mooring System"] = AQUA_VENTUS_MOOR_COSTS
-        
+
+    elif "NASA Floater" in name:
+        breakdown = deepcopy(project.capex_breakdown)
+        # print(breakdown)
+        breakdown["Substructure"] = NASA_FLOATER_SUB_COSTS
+
+        total = project.total_capex + NASA_FLOATER_SUB_COSTS
+        bos = project.bos_capex + NASA_FLOATER_SUB_COSTS
+
     else:
         breakdown = deepcopy(project.capex_breakdown)
-        total = project.total_capex 
-        bos = project.bos_capex 
+        total = project.total_capex
+        bos = project.bos_capex
 
     return total, bos, breakdown
 
