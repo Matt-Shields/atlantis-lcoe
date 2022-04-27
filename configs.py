@@ -104,7 +104,7 @@ IEA15MW_steel = {
         "strut_diameter": 0.9,
         # "steel_density": "kg/m^3 (optional, default: 8050)",
         # "ballast_mass": "tonnes (optional, default 2540)",
-        # "steel_cost_rate": "$/tonne (optional, default: 3120)",
+        "steel_cost_rate": 6000,
         # "ballast_cost_rate": "$/tonne (optional, default: 150)"
     },
 }

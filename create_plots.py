@@ -86,9 +86,8 @@ def total_capex_plots(df):
     ax.set_xlabel("")
     ax.set_ylabel("LCOE ($/MWh)")
 
-
-
     fig.savefig(os.path.join(FIGDIR, "LCOE.png"), bbox_inches='tight')
+
 
 def capex_breakdown_plots(df):
     """"""
@@ -96,6 +95,8 @@ def capex_breakdown_plots(df):
     # Raw CapEx
     fig = plt.figure(figsize=(6, 4), dpi=200)
     ax = fig.add_subplot(111)
+
+    df.loc['OpEx'] = [.38, .38, .38]
 
     df.T.plot(kind='bar', stacked=True, ax=ax).legend(bbox_to_anchor=(1.05, 1))
 

@@ -19,8 +19,9 @@ from semisub_pontoon_design import CustomSemiSubmersibleDesign
 initialize_library("data")
 
 PROJECT_kW = 600 * 1000
+AQUA_VENTUS_MOOR_PERC = 0.29
 AQUA_VENTUS_SUB_COSTS = 690 * PROJECT_kW # $
-AQUA_VENTUS_MOOR_COSTS = 0
+AQUA_VENTUS_MOOR_COSTS = AQUA_VENTUS_MOOR_PERC * AQUA_VENTUS_SUB_COSTS
 AQUA_VENTUS_ELEC_COSTS = 466 * PROJECT_kW # $
 TRANSPORT_COSTS = 1e6 / 5000  # $/t
 NASA_FLOATER_SUB_COSTS = 369.54 * PROJECT_kW
@@ -133,7 +134,7 @@ def append_capex(name, project):
         total = project.total_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS
 
         breakdown["Substructure"] = AQUA_VENTUS_SUB_COSTS
-        breakdown["Mooring System"] = AQUA_VENTUS_MOOR_COSTS
+        breakdown["Mooring System"] =  AQUA_VENTUS_MOOR_COSTS
 
     elif "NASA Floater" in name:
         breakdown = deepcopy(project.capex_breakdown)
