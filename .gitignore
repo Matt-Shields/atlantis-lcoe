@@ -2,6 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.flake8
+.gitattributes
+.gitignore
+.isort.cfg
+.pre-commit-config.yaml
+.pylintrc
 
 # C extensions
 *.so

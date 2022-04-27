@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import datetime as dt
 from copy import deepcopy
+import pprint
 
 from ORBIT import ProjectManager
 from configs import configs
@@ -19,12 +20,12 @@ from semisub_pontoon_design import CustomSemiSubmersibleDesign
 initialize_library("data")
 
 PROJECT_kW = 600 * 1000
-AQUA_VENTUS_MOOR_PERC = 0.29
-AQUA_VENTUS_SUB_COSTS = 690 * PROJECT_kW # $
+AQUA_VENTUS_MOOR_PERC = 0.25
+AQUA_VENTUS_SUB_COSTS = (1-AQUA_VENTUS_MOOR_PERC) * 728 * PROJECT_kW # $
 AQUA_VENTUS_MOOR_COSTS = AQUA_VENTUS_MOOR_PERC * AQUA_VENTUS_SUB_COSTS
 AQUA_VENTUS_ELEC_COSTS = 466 * PROJECT_kW # $
 TRANSPORT_COSTS = 1e6 / 5000  # $/t
-NASA_FLOATER_SUB_COSTS = 369.54 * PROJECT_kW
+NASA_FLOATER_SUB_COSTS = 369.17 * PROJECT_kW
 
 WEATHER_FILES = {
     "US_east_coast": "data/weather/vineyard_2014_onward.csv",
@@ -34,7 +35,6 @@ WEATHER_FILES = {
 WEATHER = {k: pd.read_csv(v, parse_dates=["datetime"]).set_index("datetime")
            for k, v in WEATHER_FILES.items()}
 START_MONTH = 4
-
 
 def run():
 
@@ -54,6 +54,7 @@ def run():
         if weather:
             print(f"\tUsing weather from '{WEATHER_FILES[weather]}'")
             weather = WEATHER[weather]
+            print(weather.describe())
 
         yrs = 0
         for yr in np.unique(weather.index.year):
@@ -63,6 +64,9 @@ def run():
             try:
                 project = ProjectManager(config, weather=sub)
                 project.run()
+
+                # print(project.detailed_output)
+
                 yrs += 1
 
             except:
@@ -115,16 +119,16 @@ def append_capex(name, project):
         breakdown["Substructure Transportation"] = cost
         total = project.total_capex + cost
         bos = project.bos_capex + cost
-    elif "2019 Aqua Ventus" in name:
-        breakdown = deepcopy(project.capex_breakdown)
-
-        bos = project.bos_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS + AQUA_VENTUS_ELEC_COSTS
-
-        total = project.total_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS + AQUA_VENTUS_ELEC_COSTS
-
-        breakdown["Substructure"] = AQUA_VENTUS_SUB_COSTS
-        breakdown["Mooring System"] = AQUA_VENTUS_MOOR_COSTS
-        breakdown["Electrical System"] = AQUA_VENTUS_ELEC_COSTS
+    # elif "2019 Aqua Ventus" in name:
+    #     breakdown = deepcopy(project.capex_breakdown)
+    #
+    #     bos = project.bos_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS + AQUA_VENTUS_ELEC_COSTS
+    #
+    #     total = project.total_capex - breakdown['Substructure'] - breakdown['Mooring System'] + AQUA_VENTUS_SUB_COSTS + AQUA_VENTUS_MOOR_COSTS + AQUA_VENTUS_ELEC_COSTS
+    #
+    #     breakdown["Substructure"] = AQUA_VENTUS_SUB_COSTS
+    #     breakdown["Mooring System"] = AQUA_VENTUS_MOOR_COSTS
+    #     breakdown["Electrical System"] = AQUA_VENTUS_ELEC_COSTS
 
     elif "Aqua Ventus" in name:
         breakdown = deepcopy(project.capex_breakdown)
@@ -148,6 +152,8 @@ def append_capex(name, project):
         breakdown = deepcopy(project.capex_breakdown)
         total = project.total_capex
         bos = project.bos_capex
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(project.detailed_outputs)
 
     return total, bos, breakdown
 

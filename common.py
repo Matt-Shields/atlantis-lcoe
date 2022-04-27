@@ -22,9 +22,9 @@ base = {
     # "turbine": "10MW_generic",
 
     "port": {
-        "sub_assembly_lines": 3,
+        "sub_assembly_lines": 1,
         # "sub_storage": "int (optional, default: inf)",
-        "turbine_assembly_cranes": 3,
+        "turbine_assembly_cranes": 1,
         # "assembly_storage": "int (optional, default: inf)",
         # "monthly_rate": "USD/mo (optional)",
         # "name": "str (optional)",
